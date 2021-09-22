@@ -1,0 +1,43 @@
+{
+    "bigraphInfo": {
+        "id": "handshake"
+    },
+    "types": [ 
+        "skey",
+        "pkey",
+        "sskey",
+        "spkey",
+        "key"
+    ],
+    "variables": {
+        "public": [],
+        "private": ["s:bitstring"]
+    },
+    "functions": {
+        "senc": "fun senc(bitstring, key) : bitstring. reduc forall m : bitstring, k : key; sdec(senc(m, k), k) = m.",
+        "aenc": "fun pk(skey): pkey. fun aenc(bitstring, pkey) : bitstring. reduc forall m : bitstring, k : skey; adec(aenc(m, pk(k)), k) = m.",
+        "sign": "fun spk(sskey) : spkey. fun sign(bitstring, sskey) : bitstring. reduc forall m : bitstring, k : sskey; getmess(sign(m, k)) = m. reduc forall m : bitstring, k : sskey; checksign(sign(m, k), spk(k)) = m."
+    },
+    "queries": {
+        "query1": {
+            "attacker": "s"
+        }
+    },
+    "instantiations": {
+        "clientA": {
+            "pkA": "pkA", 
+            "skA": "skA",
+            "pkB": "pkB" 
+        },
+        "serverB": {
+            "pkB": "pkB", 
+            "skB": "skB"
+        }
+    },
+    "prologue": [
+        "new skA : skey;",
+	    "new skB : sskey;",
+	    "let pkA = pk(skA) in out(c, pkA);",
+	    "let pkB = spk(skB) in out(c, pkB);"
+    ]
+}

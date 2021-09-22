@@ -1,0 +1,30 @@
+{
+    "bigraphInfo": {
+        "id": "testVerify"
+    },
+    "types": ["key"],
+    "variables": {
+        "public": [],
+        "private": ["mex:bitstring"]
+    },
+    "functions": {
+        "senc": "fun senc(bitstring, key) : bitstring. reduc forall m : bitstring, k : key; sdec(senc(m, k), k) = m."
+    },
+    "queries": {
+        "query1": {
+            "attacker": "mex"
+        },
+        "query2": {
+            "query": ""
+        },
+        "query3": {
+            "equation": ""
+        }
+    },
+    "instantiations": {
+        "nodeA": {
+            "x": "mex"
+        }
+    },
+    "prologue": []
+}

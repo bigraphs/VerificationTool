@@ -1,0 +1,58 @@
+{
+    "graph": {
+        "nodes": {
+            "root1": {
+                "metadata": {
+                    "type": "root",
+                    "location": 1
+                },
+                "label": "root1"
+            },
+            "processA": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [],
+                    "behaviour": "!( new k:key; out(#0+, senc(senc(s,k),k)); in(#0+, x:bitstring); out(#0+, sdec(x,k)) ).",
+                    "attribute": ""
+                },
+                "label": "processA"
+            },
+            "c": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "c"
+            }
+        },
+        "edges": [
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "processA",
+                "metadata": {}
+            },
+            {
+                "source": "processA",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            }
+        ],
+        "type": "ldb",
+        "metadata": {
+            "signature": {
+                "1on0": {
+                    "active": true,
+                    "arityOut": 1,
+                    "arityIn": 0
+                }
+            }
+        }
+    }
+}

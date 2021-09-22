@@ -1,0 +1,22 @@
+{
+    "bigraphInfo": {
+        "id": "Ex Approx Repet Private 2"
+    },
+    "types": [ 
+        "t"
+    ],
+    "variables": {
+        "public": ["M:t"],
+        "private": ["s:bitstring"]
+    },
+    "functions": {},
+    "queries": {
+        "attack": {
+            "attacker": "s"
+        }
+    },
+    "instantiations": {},
+    "prologue": [
+        "new c:channel;"
+    ]
+}

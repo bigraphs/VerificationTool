@@ -1,0 +1,59 @@
+{
+    "bigraphInfo": {
+        "id": "Needham Schroeder Pk Var1"
+    },
+    "types": [ 
+        "pkey",
+        "skey",
+        "spkey",
+        "sskey"
+    ],
+    "variables": {
+        "public": [],
+        "private": [
+            "secretANa:bitstring",
+            "secretANb:bitstring",
+            "secretBNa:bitstring",
+            "secretBNb:bitstring"
+        ]
+    },
+    "functions": {
+        "aenc": "fun pk(skey): pkey. fun aenc(bitstring, pkey): bitstring. reduc forall x: bitstring, y: skey; adec(aenc(x, pk(y)),y) = x.",
+        "sign": "fun spk(sskey): spkey. fun sign(bitstring, sskey): bitstring. reduc forall x: bitstring, y: sskey; getmess(sign(x,y)) = x. reduc forall x: bitstring, y: sskey; checksign(sign(x,y), spk(y)) = x.",
+        "sharedEnc": "fun senc(bitstring,bitstring): bitstring. reduc forall x: bitstring, y: bitstring; sdec(senc(x,y),y) = x."
+    },
+    "queries": {
+        "correspondence1": {
+            "query": "x: pkey; inj-event(endBparam(x)) ==> inj-event(beginBparam(x))"
+        },
+        "correspondence2": {
+            "query": "x: pkey; inj-event(endAparam(x)) ==> inj-event(beginAparam(x))"
+        },
+        "attack1": {
+            "attacker": "secretANa"
+        },
+        "attack2": {
+            "attacker": "secretANb"
+        },
+        "attack3": {
+            "attacker": "secretBNa"
+        },
+        "attack4": {
+            "attacker": "secretBNb"
+        }
+    },
+    "instantiations": {
+        "alice": {
+            "pkB": "pkB", 
+            "skA": "skA"
+        },
+        "bob": {
+            "pkA": "pkA", 
+            "skB": "skB"
+        }
+    },
+    "prologue": [
+        "new skA: skey; let pkA = pk(skA) in out(c, pkA);",
+	    "new skB: skey; let pkB = pk(skB) in out(c, pkB);"
+    ]
+}

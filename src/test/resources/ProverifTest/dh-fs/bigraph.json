@@ -1,0 +1,58 @@
+{
+    "graph": {
+        "nodes": {
+            "root1": {
+                "metadata": {
+                    "type": "root",
+                    "location": 1
+                },
+                "label": "root1"
+            },
+            "processA": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [],
+                    "behaviour": "new a: exponent; new b: exponent; new c: exponent; out(#0+, (exp(g,a), exp(g,b), choice[exp(exp(g,a),b), exp(g,c)])).",
+                    "attribute": ""
+                },
+                "label": "processA"
+            },
+            "d": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "d"
+            }
+        },
+        "edges": [
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "processA",
+                "metadata": {}
+            },
+            {
+                "source": "processA",
+                "relation": "linkedTo",
+                "target": "d",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            }
+        ],
+        "type": "ldb",
+        "metadata": {
+            "signature": {
+                "1on0": {
+                    "active": true,
+                    "arityOut": 1,
+                    "arityIn": 0
+                }
+            }
+        }
+    }
+}

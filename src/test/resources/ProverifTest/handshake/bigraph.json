@@ -1,0 +1,89 @@
+{
+    "graph": {
+        "nodes": {
+            "root1": {
+                "metadata": {
+                    "type": "root",
+                    "location": 1
+                },
+                "label": "root1"
+            },
+            "clientA": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [
+                        "pkA : pkey", 
+                        "skA : skey", 
+                        "pkB : spkey"
+                    ],
+                    "behaviour": "!( out (#0+, pkA); in (#0+, x : bitstring); let y = adec(x, skA) in let (=pkB, k : key) = checksign(y, pkB) in out (#0+, senc(s, k)) ).",
+                    "attribute": ""
+                },
+                "label": "clientA"
+            },
+            "serverB": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [
+                        "pkB : spkey", 
+                        "skB : sskey"
+                    ],
+                    "behaviour": "!( in(#0+, pkX : pkey); new k : key; out(#0+, aenc(sign((pkB, k), skB), pkX)); in(#0+, x : bitstring); let z = sdec(x, k) in 0 ).",
+                    "attribute": ""
+                },
+                "label": "serverB"
+            },
+            "c": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "c"
+            }
+        },
+        "edges": [
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "clientA",
+                "metadata": {}
+            },
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "serverB",
+                "metadata": {}
+            },
+            {
+                "source": "clientA",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            },
+            {
+                "source": "serverB",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            }
+        ],
+        "type": "ldb",
+        "metadata": {
+            "signature": {
+                "1on0": {
+                    "active": true,
+                    "arityOut": 1,
+                    "arityIn": 0
+                }
+            }
+        }
+    }
+}

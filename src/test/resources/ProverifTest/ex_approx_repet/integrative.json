@@ -1,0 +1,22 @@
+{
+    "bigraphInfo": {
+        "id": "ex_approx_repet"
+    },
+    "types": [ 
+        "key"
+    ],
+    "variables": {
+        "public": [],
+        "private": ["s:bitstring"]
+    },
+    "functions": {
+        "senc": "fun senc(bitstring, key): bitstring. reduc forall m: bitstring, k: key; sdec(senc(m,k),k) = m."
+    },
+    "queries": {
+        "query1": {
+            "attacker": "s"
+        }
+    },
+    "instantiations": {},
+    "prologue": []
+}

@@ -1,0 +1,112 @@
+{
+    "graph": {
+        "nodes": {
+            "root1": {
+                "metadata": {
+                    "type": "root",
+                    "location": 1
+                },
+                "label": "root1"
+            },
+            "nodeA": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "properties": {
+                        "params": [
+                            "x:bitstring"
+                        ],
+                        "behaviour": "!( out(#0+,x) ).",
+                        "events": [],
+                        "attribute": ""
+                    }
+                },
+                "label": "nodeA"
+            },
+            "nodeB": {
+                "metadata": {
+                    "type": "node",
+                    "control": "2on0",
+                    "properties": {
+                        "params": [],
+                        "behaviour": "!( in(#0+,x:bitstring); out(#1+, x) ).",
+                        "events": [],
+                        "attribute": ""
+                    }
+                },
+                "label": "nodeB"
+            },
+            "c": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "c"
+            },
+            "d": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "d"
+            }
+        },
+        "edges": [
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "nodeA",
+                "metadata": {}
+            },
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "nodeB",
+                "metadata": {}
+            },
+            {
+                "source": "nodeA",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            },
+            {
+                "source": "nodeB",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            },
+            {
+                "source": "nodeB",
+                "relation": "linkedTo",
+                "target": "d",
+                "metadata": {
+                    "portFrom": "1"
+                }
+            }
+        ],
+        "type": "ldb",
+        "metadata": {
+            "signature": {
+                "1on0": {
+                    "active": true,
+                    "arityOut": 1,
+                    "arityIn": 0
+                },
+                "2on0": {
+                    "active": true,
+                    "arityOut": 2,
+                    "arityIn": 0
+                }
+            }
+        }
+    }
+}

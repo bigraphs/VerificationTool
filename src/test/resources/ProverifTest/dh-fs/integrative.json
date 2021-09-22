@@ -1,0 +1,24 @@
+{
+    "bigraphInfo": {
+        "id": "dh-fs"
+    },
+    "types": [ 
+        "G",
+        "exponent"
+    ],
+    "variables": {
+        "public": [],
+        "private": []
+    },
+    "functions": {
+        "constG": "const g: G [data].",
+        "exp": "fun exp(G, exponent): G."
+    },
+    "queries": {
+        "equation1": {
+            "equation": "forall x: exponent, y: exponent; exp(exp(g,x),y) = exp(exp(g,y),x)"
+        }
+    },
+    "instantiations": {},
+    "prologue": []
+}

@@ -1,0 +1,96 @@
+{
+    "graph": {
+        "nodes": {
+            "root1": {
+                "metadata": {
+                    "type": "root",
+                    "location": 1
+                },
+                "label": "root1"
+            },
+            "alice": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [
+                        "pkB: pkey",
+                        "skA: skey"
+                    ],
+                    "behaviour": "!( in(#0+, pkX: pkey); event beginBparam(pkX); new Na: bitstring; out(#0+, aenc((Na, pk(skA)), pkX)); in(#0+, m: bitstring); let (=Na, NX: bitstring) = adec(m, skA) in out(#0+, aenc(NX, pkX)); if pkX = pkB  then event endAparam(pk(skA)); out(#0+, senc(secretANa, Na)); out(#0+, senc(secretANb, NX)) ).",
+                    "events": [
+                        "beginBparam(pkey)",
+                        "endAparam(pkey)"
+                    ], 
+                    "attribute": ""
+                },
+                "label": "alice"
+            },
+            "bob": {
+                "metadata": {
+                    "type": "node",
+                    "control": "1on0",
+                    "params": [
+                        "pkA: pkey",
+                        "skB: skey"
+                    ],
+                    "behaviour": "!( in(#0+, m: bitstring); let (NY: bitstring, pkY: pkey) = adec(m, skB) in event beginAparam(pkY); new Nb: bitstring; out(#0+, aenc((NY, Nb), pkY)); in(#0+, m3: bitstring); if Nb = adec(m3, skB) then if pkY = pkA then event endBparam(pk(skB)); out(#0+, senc(secretBNa, NY)); out(#0+, senc(secretBNb, Nb)) ).",
+                    "events": [
+                        "beginAparam(pkey)",
+                        "endBparam(pkey)"
+                    ],
+                    "attribute": ""
+                },
+                "label": "bob"
+            },
+            "c": {
+                "metadata": {
+                    "type": "name",
+                    "interface": "outer",
+                    "locality": 1,
+                    "polarity": "+"
+                },
+                "label": "c"
+            }
+        },
+        "edges": [
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "alice",
+                "metadata": {}
+            },
+            {
+                "source": "root1",
+                "relation": "place",
+                "target": "bob",
+                "metadata": {}
+            },
+            {
+                "source": "alice",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            },
+            {
+                "source": "bob",
+                "relation": "linkedTo",
+                "target": "c",
+                "metadata": {
+                    "portFrom": "0"
+                }
+            }
+        ],
+        "type": "ldb",
+        "metadata": {
+            "signature": {
+                "1on0": {
+                    "active": true,
+                    "arityOut": 1,
+                    "arityIn": 0
+                }
+            }
+        }
+    }
+}
