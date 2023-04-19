@@ -102,8 +102,8 @@ public class ParseInput {
             } catch (NullPointerException e) {
             }
             try {
-                events = node.<String>getProperty("events").get().substring(3).replace("#, ", ", ");
-                String[] eventsArr = events.split(", ");
+                events = node.<String>getProperty("events").get().substring(3);
+                String[] eventsArr = events.split("#, ");
                 for (int i = 0; i < eventsArr.length; i++) {
                     String contract = Constants.getEventdeclaration() + " " + eventsArr[i].strip() + Constants.getDot();
                     Event event = new Event(eventsArr[i].strip(), contract);

@@ -32,11 +32,14 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
 
     // Compile external libs
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // compile fileTree(include: ['*.jar'], dir: 'libs') DEPRECATED
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // implementation files('libs/jlibbig.jar')
+    // implementation files('libs/JLibBigIO.jar')
 
     // REQUIRE Json dependencies for JLibBigIO
     // https://mvnrepository.com/artifact/org.json/json
-    compile group: 'org.json', name: 'json', version: '20190722'
+    implementation  group: 'org.json', name: 'json', version: '20190722'
 }
 
 application {
@@ -55,6 +58,11 @@ task fatJar(type: Jar) {
     }
     // baseName = "${rootProject.name}"
     baseName = "serverProverif"
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    // from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
+
+// wrapper { 
+//     gradleVersion = '4.9' 
+// }

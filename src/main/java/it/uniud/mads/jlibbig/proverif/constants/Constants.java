@@ -22,7 +22,8 @@ public class Constants {
 
     // private static final String httpBaseUrl = "http://localhost:5001/";
     private static final String httpBaseUrl = "http://172.19.0.2:5001/";
-    private static final String httpGetOutputUrl = "http://localhost:8081/";
+    // private static final String httpGetOutputUrl = "http://localhost:8081/"; // Utilizzo direttamente su Host
+    private static final String httpGetOutputUrl = "http://172.19.0.2:5001/"; // Utilizzo con container GUI
     private static final String httpGet = "GET";
     private static final String httpPost = "POST";
     private static final String httpPut = "PUT";
